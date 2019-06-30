@@ -26,10 +26,6 @@ class Pin {
         }
         strokeWeight(5);
         ellipse(this.x, this.y, this.r);
-        // textAlign(CENTER, CENTER);
-        // fill(200);
-        // stroke(this.borderNotActive);
-        // text(`${this.row}, ${this.idx}`, this.x, this.y);
     }
 
     select() {
