@@ -10,6 +10,7 @@ let firstMove;
 let hasSelected;
 let pinsToDo;
 let movesCount = 0;
+let winningCondition = 0;
 
 function setup() {
     createCanvas(800, 500);
@@ -30,7 +31,7 @@ function draw() {
     fill(0);
     textSize(14);
     text(`Moves count\n${movesCount}`, 19, 80);
-    if (pinsToDo<=12) {
+    if (pinsToDo<=winningCondition) {
         textAlign(CENTER, CENTER);
         fill(color(200, 0, 0));
         strokeWeight(3);
