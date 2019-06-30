@@ -1,6 +1,5 @@
 let pin;
 let pins;
-const n = 3; //number of pins
 const rows = 5; //number of rows
 let rowsTmp;
 let row;
@@ -9,8 +8,6 @@ const y = 50;
 const r = 70;
 let firstMove;
 let hasSelected;
-const rowsLookup = {1:1, 2:2, 3:2, 4:3, 5:3, 6:3, 7:4, 8:4, 9:4, 10:4, 11:5, 12:5, 13:5, 14:5, 15:5};
-const isOdd = (num) => num%2!=0;
 let pinsToDo;
 let movesCount = 0;
 
@@ -59,10 +56,7 @@ function mouseClicked() {
                         if (Math.abs(pinsClose)===2) {
                             let row = (pins[hasSelected].row - pin.row)/2;
                             let idx = (pins[hasSelected].idx - pin.idx)/2;
-                            // console.log(row, idx);
                             let pinMid = findByRowIdx(pins[hasSelected].row-row, pins[hasSelected].idx-idx);
-                            // console.log(pinMid);
-                            // console.log("pins are close", pinsClose);
                             if (pinMid && !pinMid.empty && pin.empty && !pins[hasSelected].empty) {
                                 console.log("empty pin", pinMid.row, pinMid.idx);
                                 pinMid.empty = true;
@@ -77,7 +71,6 @@ function mouseClicked() {
                         hasSelected = i;
                         pin.select();
                     }
-                    
                 } else {
                     pin.select();
                     hasSelected = -1;
