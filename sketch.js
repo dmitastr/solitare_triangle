@@ -20,6 +20,7 @@ function setup() {
     let button = createButton("reset");
     button.position(19, 19);
     button.mousePressed(resetSketch);
+    createA('https://www.youtube.com/watch?v=mRG2k-nOfec&feature=youtu.be', 'Rules of the game');
 }
 
 function draw() {
