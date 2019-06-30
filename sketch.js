@@ -11,6 +11,7 @@ let hasSelected;
 let pinsToDo;
 let movesCount = 0;
 let winningCondition = 0;
+let movesHistory;
 
 function setup() {
     createCanvas(800, 500);
@@ -30,7 +31,7 @@ function draw() {
     strokeWeight(1);
     fill(0);
     textSize(14);
-    text(`Moves count\n${movesCount}`, 19, 80);
+    text(`Moves count\n${movesHistory.length}`, 19, 80);
     if (pinsToDo<=winningCondition) {
         textAlign(CENTER, CENTER);
         fill(color(200, 0, 0));
@@ -57,14 +58,17 @@ function mouseClicked() {
                         if (Math.abs(pinsClose)===2) {
                             let row = (pins[hasSelected].row - pin.row)/2;
                             let idx = (pins[hasSelected].idx - pin.idx)/2;
-                            let pinMid = findByRowIdx(pins[hasSelected].row-row, pins[hasSelected].idx-idx);
+                            let rowMid = pins[hasSelected].row-row;
+                            let idxMid = pins[hasSelected].idx-idx;
+                            let pinMid = findByRowIdx(rowMid, idxMid);
                             if (pinMid && !pinMid.empty && pin.empty && !pins[hasSelected].empty) {
                                 console.log("empty pin", pinMid.row, pinMid.idx);
                                 pinMid.empty = true;
                                 pin.empty = false;
                                 pins[hasSelected].empty = true;
                                 pinsToDo -= 1;
-                                movesCount += 1;
+                                // movesCount += 1;
+                                movesHistory.push({row: rowMid, idx: idxMid});
                             }
                         }
                         hasSelected = i;
@@ -94,6 +98,7 @@ function findByRowIdx(row, idx) {
 
 function resetSketch() {
     pins = [];
+    movesHistory = [];
     firstMove = true;
     hasSelected = -1;
     rowsTmp = [];
