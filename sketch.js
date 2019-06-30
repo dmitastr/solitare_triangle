@@ -15,11 +15,15 @@ let movesHistory;
 
 function setup() {
     createCanvas(800, 500);
-    resetSketch();
+    
     let button = createButton("reset");
     button.position(19, 19);
     button.mousePressed(resetSketch);
+    let undo = createButton("undo");
+    undo.position(19, 50);
+    undo.mousePressed(undoMove);
     createA('https://www.youtube.com/watch?v=mRG2k-nOfec&feature=youtu.be', 'Rules of the game');
+    resetSketch();
 }
 
 function draw() {
@@ -31,7 +35,7 @@ function draw() {
     strokeWeight(1);
     fill(0);
     textSize(14);
-    text(`Moves count\n${movesHistory.length}`, 19, 80);
+    text(`Moves count\n${movesHistory.length}`, 19, 100);
     if (pinsToDo<=winningCondition) {
         textAlign(CENTER, CENTER);
         fill(color(200, 0, 0));
@@ -68,7 +72,7 @@ function mouseClicked() {
                                 pins[hasSelected].empty = true;
                                 pinsToDo -= 1;
                                 // movesCount += 1;
-                                movesHistory.push({row: rowMid, idx: idxMid});
+                                movesHistory.push({pinA: pin, pinB: pinMid, pinC: pins[hasSelected]});
                             }
                         }
                         hasSelected = i;
@@ -125,4 +129,16 @@ function resetSketch() {
     }
     console.log(pins.length);
     pinsToDo = pins.length - 1;
+}
+
+function undoMove() {
+    if (movesHistory.length>0) {
+        let move = movesHistory.pop();
+        // let pin = findByRowIdx(move.row, move.idx);
+        move.pinA.empty = true;
+        move.pinB.empty = false;
+        move.pinC.empty = false;
+        pinsToDo += 1;
+
+    }
 }
