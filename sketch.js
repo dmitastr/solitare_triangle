@@ -15,7 +15,6 @@ let movesHistory;
 
 function setup() {
     createCanvas(800, 500);
-    
     let button = createButton("reset");
     button.position(19, 19);
     button.mousePressed(resetSketch);
