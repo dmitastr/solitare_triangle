@@ -10,7 +10,7 @@ let firstMove;
 let hasSelected;
 let pinsToDo;
 let movesCount = 0;
-let winningCondition = 0;
+let winningCondition = 1;
 let movesHistory;
 
 function setup() {
