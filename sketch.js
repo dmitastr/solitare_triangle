@@ -15,9 +15,10 @@ let movesHistory;
 let input, buttonInput;
 let button;
 let undo;
+let cheat = 0;
 
 function setup() {
-    createCanvas(1000, 800);
+    createCanvas(700, 500);
     button = createButton("reset");
     button.position(19, 19);
     button.mousePressed(resetSketch);
@@ -36,14 +37,18 @@ function setup() {
 
 function draw() {
     background(255);
+    textSize(14);
+    strokeWeight(0);
+    stroke(0);
     fill(0);
     text('enter number of rows', 19, 90);
     for (let i=0; i<pins.length; i++) {
         pins[i].show();
     }
     textAlign(LEFT, LEFT);
-    strokeWeight(1);
+    strokeWeight(0);
     fill(0);
+    stroke(0);
     textSize(14);
     text(`Moves count\n${movesHistory.length}`, 19, 150);
     if (pinsToDo<=winningCondition) {
@@ -52,7 +57,7 @@ function draw() {
         strokeWeight(3);
         stroke(0);
         textSize(40);
-        text('You are winner!', width/2, height/2);
+        text('You are winner!', width/2+50, height/2);
     }
 }
 
@@ -91,6 +96,15 @@ function mouseClicked() {
                 } else {
                     pin.select();
                     hasSelected = -1;
+                    cheat += 1;
+                    if (cheat>=15) {
+                        pinsToDo = 1;
+                        pins[0].empty = false;
+                        for (let i=1; i<pins.length; i++) {
+                            pins[i].empty = true;
+                        }
+
+                    }
                 }                   
             }
         }
@@ -141,7 +155,6 @@ function resetSketch() {
 function undoMove() {
     if (movesHistory.length>0) {
         let move = movesHistory.pop();
-        // let pin = findByRowIdx(move.row, move.idx);
         move.pinA.empty = true;
         move.pinB.empty = false;
         move.pinC.empty = false;
