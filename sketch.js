@@ -18,7 +18,7 @@ let undo;
 let cheat = 0;
 
 function setup() {
-    createCanvas(700, 500);
+    createCanvas(1000, 800);
     button = createButton("reset");
     button.position(19, 19);
     button.mousePressed(resetSketch);
@@ -57,7 +57,7 @@ function draw() {
         strokeWeight(3);
         stroke(0);
         textSize(40);
-        text('You are winner!', width/2+50, height/2);
+        text('You are winner!', 400, 250);
     }
 }
 
