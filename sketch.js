@@ -1,32 +1,43 @@
 let pin;
 let pins;
-const rows = 5; //number of rows
+let rows = 5; //number of rows
 let rowsTmp;
 let row;
 const x = 400;
 const y = 50;
-const r = 70;
+let r;
 let firstMove;
 let hasSelected;
 let pinsToDo;
 let movesCount = 0;
 let winningCondition = 1;
 let movesHistory;
+let input, buttonInput;
+let button;
+let undo;
 
 function setup() {
-    createCanvas(800, 500);
-    let button = createButton("reset");
+    createCanvas(1000, 800);
+    button = createButton("reset");
     button.position(19, 19);
     button.mousePressed(resetSketch);
-    let undo = createButton("undo");
+    undo = createButton("undo");
     undo.position(19, 50);
     undo.mousePressed(undoMove);
+    input = createInput(5, "int");
+    input.position(19, 100);
+    input.size(25, 16);
+    buttonInput = createButton('submit');
+    buttonInput.position(input.x + input.width, input.y);
+    buttonInput.mousePressed(resetSketch);
     createA('https://www.youtube.com/watch?v=mRG2k-nOfec&feature=youtu.be', 'Rules of the game');
     resetSketch();
 }
 
 function draw() {
     background(255);
+    fill(0);
+    text('enter number of rows', 19, 90);
     for (let i=0; i<pins.length; i++) {
         pins[i].show();
     }
@@ -34,7 +45,7 @@ function draw() {
     strokeWeight(1);
     fill(0);
     textSize(14);
-    text(`Moves count\n${movesHistory.length}`, 19, 100);
+    text(`Moves count\n${movesHistory.length}`, 19, 150);
     if (pinsToDo<=winningCondition) {
         textAlign(CENTER, CENTER);
         fill(color(200, 0, 0));
@@ -65,12 +76,10 @@ function mouseClicked() {
                             let idxMid = pins[hasSelected].idx-idx;
                             let pinMid = findByRowIdx(rowMid, idxMid);
                             if (pinMid && !pinMid.empty && pin.empty && !pins[hasSelected].empty) {
-                                console.log("empty pin", pinMid.row, pinMid.idx);
                                 pinMid.empty = true;
                                 pin.empty = false;
                                 pins[hasSelected].empty = true;
                                 pinsToDo -= 1;
-                                // movesCount += 1;
                                 movesHistory.push({pinA: pin, pinB: pinMid, pinC: pins[hasSelected]});
                             }
                         }
@@ -82,9 +91,7 @@ function mouseClicked() {
                 } else {
                     pin.select();
                     hasSelected = -1;
-                }
-        console.log(hasSelected);
-                    
+                }                   
             }
         }
     }    
@@ -101,6 +108,8 @@ function findByRowIdx(row, idx) {
 
 function resetSketch() {
     pins = [];
+    rows = int(input.value()) || 5;
+    r = min(80*5/rows, 70);
     movesHistory = [];
     firstMove = true;
     hasSelected = -1;
@@ -126,7 +135,6 @@ function resetSketch() {
             rowsTmp = row;
         }
     }
-    console.log(pins.length);
     pinsToDo = pins.length - 1;
 }
 
