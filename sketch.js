@@ -18,20 +18,30 @@ let undo;
 let cheat = 0;
 
 function setup() {
-    createCanvas(1000, 800);
-    button = createButton("reset");
-    button.position(19, 19);
-    button.mousePressed(resetSketch);
+    let canvas = createCanvas(700, 500);
+    canvas.parent('game_div');
+    my_button = createButton("reset");
+    my_button.position(19, 19);
+    my_button.parent('game_div');
+    my_button.mousePressed(resetSketch);
     undo = createButton("undo");
     undo.position(19, 50);
+    undo.parent('game_div');
     undo.mousePressed(undoMove);
     input = createInput(5, "int");
     input.position(19, 100);
     input.size(25, 16);
+    input.parent('game_div');
     buttonInput = createButton('submit');
     buttonInput.position(input.x + input.width, input.y);
+    buttonInput.parent('game_div');
     buttonInput.mousePressed(resetSketch);
-    createA('https://www.youtube.com/watch?v=mRG2k-nOfec&feature=youtu.be', 'Rules of the game');
+    my_link = createA('https://www.youtube.com/watch?v=mRG2k-nOfec&feature=youtu.be', 'Rules of the game');
+    my_link.position(600, 14)
+    my_link.parent('game_div');
+    my_link_2 = createA('https://github.com/dmitastr/solitare_triangle', 'Docs & License');
+    my_link_2.position(600, 34)
+    my_link_2.parent('game_div');
     resetSketch();
 }
 
@@ -57,7 +67,7 @@ function draw() {
         strokeWeight(3);
         stroke(0);
         textSize(40);
-        text('You are winner!', 400, 250);
+        text('You are winner!', width/2+50, height/2);
     }
 }
 
