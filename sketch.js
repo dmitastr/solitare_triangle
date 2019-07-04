@@ -135,6 +135,7 @@ function findByRowIdx(row, idx) {
 }
 
 function resetSketch() {
+    localStorage.clear();
     pins = [];
     rows = int(input.value()) || 5;
     r = min(80*5/rows, 70);
