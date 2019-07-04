@@ -42,10 +42,10 @@ function setup() {
     my_link_2 = createA('https://github.com/dmitastr/solitare_triangle', 'Docs & License');
     my_link_2.position(600, 34);
     my_link_2.parent('game_div');
-	rules_button = createButton("Short rules");
-	rules_button.position(600, 58);
-	rules_button.parent('game_div');
-	rules_button.mousePressed(show_Rules);
+    rules_button = createButton("Short rules");
+    rules_button.position(600, 58);
+    rules_button.parent('game_div');
+    rules_button.mousePressed(show_Rules);
     resetSketch();
 }
 
@@ -178,8 +178,8 @@ function undoMove() {
 }
 
 function show_Rules() {
-	rules_text = "The goal is to reduce amount of black figures as much as possible. For 5 rows (standard game) 1 black figure is the best result. ";
-	rules_text += "First turn removes any black figure. Any other turn must coordinate a jump of one figure above any other one. ";
-	rules_text += "Figure you jumped over will be removed from the grid. Active figure you want to move is highlighted with bright borders. ";
-	alert(rules_text);
+    rules_text = "The goal is to reduce amount of black figures as much as possible. For 5 rows (standard game) 1 black figure is the best result. ";
+    rules_text += "First turn removes any black figure. Any other turn must coordinate a jump of one figure above any other one. ";
+    rules_text += "Figure you jumped over will be removed from the grid. Active figure you want to move is highlighted with bright borders. ";
+    alert(rules_text);
 }
