@@ -18,7 +18,7 @@ let undo;
 let cheat = 0;
 
 function setup() {
-    let canvas = createCanvas(700, 500);
+    let canvas = createCanvas(750, 550);
     canvas.parent('game_div');
     my_button = createButton("reset");
     my_button.position(19, 19);
@@ -28,12 +28,14 @@ function setup() {
     undo.position(19, 50);
     undo.parent('game_div');
     undo.mousePressed(undoMove);
-    input = createInput(5, "int");
-    input.position(19, 100);
-    input.size(25, 16);
-    input.parent('game_div');
+    input = document.getElementById("rows");
+    console.log(input);
+    // input = createInput(5, "number");
+    // input.position(19, 100);
+    // input.size(25, 16);
+    // input.parent('game_div');
     buttonInput = createButton('submit');
-    buttonInput.position(input.x + input.width, input.y);
+    buttonInput.position(60, 100);
     buttonInput.parent('game_div');
     buttonInput.mousePressed(resetSketch);
     my_link = createA('https://www.youtube.com/watch?v=mRG2k-nOfec&feature=youtu.be', 'Who inspired?');
@@ -137,7 +139,7 @@ function findByRowIdx(row, idx) {
 function resetSketch() {
     localStorage.clear();
     pins = [];
-    rows = int(input.value()) || 5;
+    rows = int(input.value) || 5;
     r = min(80*5/rows, 70);
     movesHistory = [];
     firstMove = true;
