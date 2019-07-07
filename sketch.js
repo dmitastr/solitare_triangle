@@ -15,7 +15,7 @@ let movesHistory;
 let input, buttonInput;
 let button;
 let undo;
-let cheat = 0;
+let cheat;
 
 function setup() {
     let canvas = createCanvas(750, 550);
@@ -68,12 +68,16 @@ function draw() {
     textSize(14);
     text(`Moves count\n${movesHistory.length}`, 19, 150);
     if (pinsToDo<=winningCondition) {
-        textAlign(CENTER, CENTER);
-        fill(color(200, 0, 0));
+	rectMode(CENTER);
         strokeWeight(3);
+	fill(255);
+	stroke(0);
+	rect(width/2+30, height/2, 300, 80);
+        textAlign(CENTER, CENTER);
+        fill(color(250, 0, 0));
         stroke(0);
         textSize(40);
-        text('You are winner!', width/2+50, height/2);
+        text('You are winner!', width/2+30, height/2);
     }
 }
 
@@ -137,6 +141,7 @@ function findByRowIdx(row, idx) {
 }
 
 function resetSketch() {
+    cheat = 0;
     localStorage.clear();
     pins = [];
     rows = int(input.value) || 5;
